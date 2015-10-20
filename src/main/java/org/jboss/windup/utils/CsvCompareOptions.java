@@ -84,9 +84,9 @@ public class CsvCompareOptions
     private static Options getCMdOptions() {
         
         Options options = new Options();
-        options.addOption( Option.builder("o").required(true).longOpt("old-file").build());
-        options.addOption( Option.builder("n").required(true).longOpt("new-file").build());
-        options.addOption( Option.builder("d").longOpt("csv-delimiter").build());
+        options.addOption( Option.builder("o").required(true).hasArg(true).longOpt("old-file").build());
+        options.addOption( Option.builder("n").required(true).hasArg(true).longOpt("new-file").build());
+        options.addOption( Option.builder("d").hasArg(true).longOpt("csv-delimiter").build());
         
         return options;
     }
