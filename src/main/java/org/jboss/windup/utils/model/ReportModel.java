@@ -144,6 +144,7 @@ public class ReportModel
     {
         final int prime = 31;
         int result = 1;
+        result = prime * result + ((storyPoints == null) ? 0 : storyPoints.hashCode());
         result = prime * result + ((filename == null) ? 0 : filename.hashCode());
         result = prime * result + ((lineNumber == null) ? 0 : lineNumber.hashCode());
         result = prime * result + ((ruleId == null) ? 0 : ruleId.hashCode());
@@ -163,6 +164,13 @@ public class ReportModel
         if (getClass() != obj.getClass())
             return false;
         ReportModel other = (ReportModel) obj;
+        if (storyPoints == null)
+        {
+            if (other.storyPoints != null)
+                return false;
+        }
+        else if (!storyPoints.equals(other.storyPoints))
+            return false;
         if (filename == null)
         {
             if (other.filename != null)

@@ -20,11 +20,11 @@ public class CsvCompareOptions
 {
     public static final Logger logger = LogManager.getLogger(CsvCompareOptions.class);
     
-    public static final String DEFAULT_CSV_DELIMITER = ";";
+    public static final char DEFAULT_CSV_DELIMITER = ';';
     
     private String oldFile;
     private String newFile;
-    private String delimiter = DEFAULT_CSV_DELIMITER;
+    private char delimiter = DEFAULT_CSV_DELIMITER;
     
     
     public void parse (String[] args) throws Exception {
@@ -36,17 +36,17 @@ public class CsvCompareOptions
         }
             
         CommandLine line = parser.parse( getCMdOptions(), args );
-        if ( line.hasOption("o")) {
+        if ( line.hasOption('o')) {
             this.setOldFile( line.getOptionValue("o"));
             logger.debug("old file is " + getOldFile());
         }
-        if (line.hasOption("n")) {
+        if (line.hasOption('n')) {
             this.setNewFile(line.getOptionValue("n"));
             logger.debug("new file is " + getNewFile());
         }
         
-        if (line.hasOption("d")) {
-            this.setDelimiter(line.getOptionValue("d"));
+        if (line.hasOption('d')) {
+            this.setDelimiter(line.getOptionValue('d').charAt(0));
             logger.debug("CSV delimiter is " + getDelimiter());
         } 
     }
@@ -71,12 +71,12 @@ public class CsvCompareOptions
         this.newFile = newFile;
     }
 
-    public String getDelimiter()
+    public char getDelimiter()
     {
         return delimiter;
     }
 
-    public void setDelimiter(String delimiter)
+    public void setDelimiter(char delimiter)
     {
         this.delimiter = delimiter;
     }
