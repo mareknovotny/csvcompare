@@ -3,6 +3,8 @@
  */
 package org.jboss.windup.utils.model;
 
+import java.io.Serializable;
+
 /**
  * 
  * Mapping to one line in CSV report
@@ -10,8 +12,20 @@ package org.jboss.windup.utils.model;
  * @author mnovotny
  *
  */
-public class ReportModel
+public class ReportModel implements Serializable
 {
+    private static final long serialVersionUID = -8063940942301635431L;
+
+    /* (non-Javadoc)
+     * @see java.lang.Object#toString()
+     */
+    @Override
+    public String toString()
+    {
+        return "ReportModel [ruleId=" + ruleId + ", problemType=" + problemType + ", application=" + application + ", filename=" + filename
+                    + ", filePath=" + filePath + ", lineNumber=" + lineNumber + ", storyPoints=" + storyPoints + "]";
+    }
+
     private String ruleId;
     
     private String problemType;
