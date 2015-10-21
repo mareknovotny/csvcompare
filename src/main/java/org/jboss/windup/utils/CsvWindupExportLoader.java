@@ -1,0 +1,77 @@
+/**
+ * 
+ */
+package org.jboss.windup.utils;
+
+import java.io.FileReader;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import com.opencsv.CSVReader;
+import com.opencsv.bean.CsvToBean;
+import com.opencsv.bean.HeaderColumnNameTranslateMappingStrategy;
+import com.opencsv.bean.MappingStrategy;
+
+/**
+ * @author mnovotny
+ *
+ */
+public class CsvWindupExportLoader
+{
+    public static final Logger logger = LogManager.getLogger(CsvWindupExportLoader.class);
+
+    private static final String[] CSV_COLUMNS = {"Rule Id","Problem type","Title","Description","Links","Application","File Name","File Path","Line","Story points"};
+    private static final String[] REPORTMODEL_FIELDS = {"ruleId","problemType","title","description","links","application","fileName","filePath","line","storyPoints"};
+    
+    // init mapping for CSV column to ReportModel bean
+    private static Map<String,String> mapping = new HashMap<String,String>();
+    static {
+        for (int i = 0; i < CSV_COLUMNS.length; i++)
+        {
+            mapping.put(CSV_COLUMNS[i], REPORTMODEL_FIELDS[i]);
+        }
+    }
+    
+    private URL fileToLoad;
+    
+    private char delimiter;
+    
+    private HeaderColumnNameTranslateMappingStrategy<ReportModel> mappingStrategy;
+    
+    public CsvWindupExportLoader(URL fileUrl, char delimiter) {
+        this.fileToLoad = fileUrl;
+        this.delimiter = delimiter;
+        setColumnPositionMappingStrategy();
+    }
+    
+    private void setColumnPositionMappingStrategy() {
+        mappingStrategy = new HeaderColumnNameTranslateMappingStrategy<ReportModel>();
+        mappingStrategy.setColumnMapping(mapping);
+        mappingStrategy.setType(ReportModel.class);
+    }
+    
+    public List<ReportModel> parseCSV() {
+        
+        List<ReportModel> listOfReportModels = new ArrayList<ReportModel>();
+        String file = fileToLoad.getFile();
+        
+        try (CSVReader reader = new CSVReader(new FileReader(file), delimiter))
+        {
+            CsvToBean<ReportModel> csv = new CsvToBean<ReportModel>();
+            listOfReportModels = csv.parse(((MappingStrategy<ReportModel>) mappingStrategy),reader);
+        }
+        catch (Exception e) {
+            logger.error("Something wrong happened while loading CSV file " + e.getLocalizedMessage());
+            e.printStackTrace();
+        }
+        
+        
+        return listOfReportModels;
+    }
+}
