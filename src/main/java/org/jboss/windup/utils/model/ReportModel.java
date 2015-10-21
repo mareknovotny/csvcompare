@@ -1,7 +1,7 @@
 /**
  * 
  */
-package org.jboss.windup.utils;
+package org.jboss.windup.utils.model;
 
 /**
  * 

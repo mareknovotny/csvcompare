@@ -12,6 +12,7 @@ import java.util.Map;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.jboss.windup.utils.model.ReportModel;
 
 import com.opencsv.CSVReader;
 import com.opencsv.bean.CsvToBean;
@@ -64,7 +65,7 @@ public class CsvWindupExportLoader
         try (CSVReader reader = new CSVReader(new FileReader(file), delimiter))
         {
             CsvToBean<ReportModel> csv = new CsvToBean<ReportModel>();
-            listOfReportModels = csv.parse(((MappingStrategy<ReportModel>) mappingStrategy),reader);
+            listOfReportModels = csv.parse(mappingStrategy,reader);
         }
         catch (Exception e) {
             logger.error("Something wrong happened while loading CSV file " + e.getLocalizedMessage());

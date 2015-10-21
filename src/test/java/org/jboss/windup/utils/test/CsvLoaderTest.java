@@ -6,7 +6,7 @@ import java.net.URL;
 import java.util.List;
 
 import org.jboss.windup.utils.CsvWindupExportLoader;
-import org.jboss.windup.utils.ReportModel;
+import org.jboss.windup.utils.model.ReportModel;
 import org.junit.Test;
 
 public class CsvLoaderTest
