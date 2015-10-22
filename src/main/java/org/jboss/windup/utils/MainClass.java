@@ -45,7 +45,7 @@ public class MainClass
             if (listDiff.size()> 0) {
                 logger.debug(listDiff);
                 (new ExportReportModelToCSV(listDiff)).export(new File("diff.csv"));
-                System.exit(-1);
+                System.exit(1);
             } else {
                 System.exit(0);
             }
