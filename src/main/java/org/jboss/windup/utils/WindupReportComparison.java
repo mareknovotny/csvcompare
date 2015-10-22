@@ -35,12 +35,12 @@ public class WindupReportComparison
         
         Set<ReportModel> intersect = new HashSet<ReportModel>(originalReport);
         intersect.retainAll(newReport);
-        logger.debug("Intersection has got " + intersect.size());
+        logger.trace("Intersection has got " + intersect.size());
         
         result.addAll(newReport);
-        logger.debug("Result has got " + result.size());
+        logger.trace("Result has got " + result.size());
         result.removeAll(intersect);
-        logger.debug("Result has got " + result.size());
+        logger.trace("Result has got " + result.size());
         
         return result;
     }
