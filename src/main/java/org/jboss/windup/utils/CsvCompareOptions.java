@@ -3,6 +3,8 @@
  */
 package org.jboss.windup.utils;
 
+import java.io.File;
+
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.DefaultParser;
@@ -37,11 +39,21 @@ public class CsvCompareOptions
             
         CommandLine line = parser.parse( getCMdOptions(), args );
         if ( line.hasOption('o')) {
-            this.setOldFile( line.getOptionValue("o"));
+            String oldFileOptionValue = line.getOptionValue("o");
+            if (validateExistingFile(oldFileOptionValue)) {
+                logger.error("file path in option old-file is wrong as file doesn't exist");
+                throw new IllegalArgumentException("file path in option old-file is wrong as file doesn't exist");
+            }
+            this.setOldFile( oldFileOptionValue);
             logger.debug("old file is " + getOldFile());
         }
         if (line.hasOption('n')) {
-            this.setNewFile(line.getOptionValue("n"));
+            String newFileOptionValue = line.getOptionValue("n");
+            if (validateExistingFile(newFileOptionValue)) {
+                logger.error("file path in option new-file is wrong as file doesn't exist");
+                throw new IllegalArgumentException("file path in option new-file is wrong as file doesn't exist");
+            }
+            this.setNewFile(newFileOptionValue);
             logger.debug("new file is " + getNewFile());
         }
         
@@ -49,6 +61,14 @@ public class CsvCompareOptions
             this.setDelimiter(line.getOptionValue('d').charAt(0));
             logger.debug("CSV delimiter is " + getDelimiter());
         } 
+        
+        //validations
+        
+    }
+    
+    private boolean validateExistingFile(String strFilePath) {
+        File file = new File(strFilePath);
+        return file.isFile();
     }
     
     public String getOldFile()
