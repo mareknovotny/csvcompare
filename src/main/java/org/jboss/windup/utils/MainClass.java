@@ -3,12 +3,15 @@
  */
 package org.jboss.windup.utils;
 
+import java.io.File;
+import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.jboss.windup.utils.model.ExportReportModelToCSV;
 import org.jboss.windup.utils.model.ReportModel;
 
 /**
@@ -40,14 +43,17 @@ public class MainClass
             WindupReportComparison reportCmp = new WindupReportComparison(loader1.parseCSV(), loader2.parseCSV());
             List<ReportModel> listDiff = reportCmp.compareNewAndOldReports();
             if (listDiff.size()> 0) {
-                System.out.println(listDiff);
+                logger.debug(listDiff);
+                (new ExportReportModelToCSV(listDiff)).export(new File("diff.csv"));
                 System.exit(-1);
+            } else {
+                System.exit(0);
             }
-            System.exit(0);
         }
-        catch (MalformedURLException e)
-        {
+        catch (MalformedURLException e) {
            logger.error("Wrong CSV file path " + e.getLocalizedMessage());
+        } catch (IOException ioe) {
+           logger.error("Error while exporting resulted difference to file - " + ioe.getLocalizedMessage());
         }
     }
 

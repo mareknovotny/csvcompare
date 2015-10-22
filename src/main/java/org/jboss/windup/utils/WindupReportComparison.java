@@ -4,7 +4,6 @@
 package org.jboss.windup.utils;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -30,15 +29,18 @@ public class WindupReportComparison
     public List<ReportModel> compareNewAndOldReports() {
         List<ReportModel> result = new ArrayList<ReportModel>();
         if (originalReport == null || newReport == null) {
-            logger.debug("One of the reports has got more occurences");
+            logger.debug("One of the reports is empty");
             return null;
         }
         
         Set<ReportModel> intersect = new HashSet<ReportModel>(originalReport);
         intersect.retainAll(newReport);
+        logger.debug("Intersection has got " + intersect.size());
         
         result.addAll(newReport);
+        logger.debug("Result has got " + result.size());
         result.removeAll(intersect);
+        logger.debug("Result has got " + result.size());
         
         return result;
     }
@@ -47,6 +49,4 @@ public class WindupReportComparison
         this.newReport = newList;
         this.originalReport = oldList;
     }
-    
-    
 }

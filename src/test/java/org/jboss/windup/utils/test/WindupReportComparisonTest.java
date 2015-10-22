@@ -2,27 +2,37 @@ package org.jboss.windup.utils.test;
 
 import static org.junit.Assert.*;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.jboss.windup.utils.WindupReportComparison;
+import org.jboss.windup.utils.model.ExportReportModelToCSV;
 import org.jboss.windup.utils.model.ReportModel;
 import org.junit.Test;
 
 public class WindupReportComparisonTest
 {
-    
 
     @Test
-    public void testCompareNewAndOldReports()
+    public void testCompareNewAndOldReports() throws Exception 
     {
         WindupReportComparison cmp = new WindupReportComparison(createList1(), createList2());
         List<ReportModel> result = cmp.compareNewAndOldReports();
         assertNotNull(result);
         assertEquals(1, result.size());
-        System.out.println(result);
+        //System.out.println(result);
+        //(new ExportReportModelToCSV(result)).export(new File("result.csv"));
     }
     
+    /**
+     * 
+     * @return test data
+     *  test-0001","hint","44","Test.java","src/main/java","1
+     *  test-0002","hint","41","Sample.java","src/main/java","3
+     *  test-0002","hint","44","Sample.java","src/main/java","3
+     */
     private static List<ReportModel> createList1() {
         List<ReportModel> result = new ArrayList<ReportModel>();
         
@@ -62,6 +72,14 @@ public class WindupReportComparisonTest
         return result;
     }
     
+    /**
+     *
+     * @return test data
+        test-0001","hint","44","Test.java","src/main/java","1
+        test-0002","hint","41","Sample.java","src/main/java","0
+        test-0002","hint","44","Sample.java","src/main/java","3
+     *
+     */
     private static List<ReportModel> createList2() {
         List<ReportModel> result = new ArrayList<ReportModel>();
         
@@ -100,5 +118,38 @@ public class WindupReportComparisonTest
         
         return result;
     }
-
+    
+    @Test
+    public void testExport() {
+        
+        ExportReportModelToCSV export1 = new ExportReportModelToCSV(createList1());
+        File exportFile1 = new File("export1.csv");
+        if (exportFile1.exists()) {
+            exportFile1.delete();
+        }
+        try
+        {
+            export1.export(exportFile1);
+        }
+        catch (IOException e)
+        {
+            fail("export1 - This should not fail in exporting to file!");
+        }
+        assertTrue(exportFile1.length() > 0);
+        
+        ExportReportModelToCSV export2 = new ExportReportModelToCSV(createList2());
+        File exportFile2 = new File("export2.csv");
+        if (exportFile2.exists()) {
+            exportFile2.delete();
+        }
+        try
+        {
+            export2.export(exportFile2);
+        }
+        catch (IOException e)
+        {
+            fail("export2 - This should not fail in exporting to file!");
+        }
+        assertTrue(exportFile2.length() > 0);
+    }
 }

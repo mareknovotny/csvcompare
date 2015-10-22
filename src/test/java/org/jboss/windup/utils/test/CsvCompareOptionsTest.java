@@ -37,7 +37,7 @@ public class CsvCompareOptionsTest
         assertNotNull(ccOptions.getDelimiter());
         assertNotNull(ccOptions.getNewFile());
         assertNotNull(ccOptions.getOldFile());
-        assertEquals("Delimiter is not set correctly", ";", ccOptions.getDelimiter());
+        assertEquals("Delimiter is not set correctly", ';', ccOptions.getDelimiter());
         assertEquals("new-file is not set correctly", "file2.txt", ccOptions.getNewFile());
         assertEquals("old-file is not set correctly", "file1.txt", ccOptions.getOldFile());
         

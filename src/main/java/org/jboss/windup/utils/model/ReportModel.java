@@ -208,5 +208,21 @@ public class ReportModel implements Serializable
             return false;
         return true;
     }
+
+    public String[] getStringArray()
+    {
+        return new String[] { emptyStringIfNull(getRuleId()) , emptyStringIfNull(getProblemType()),
+                    emptyStringIfNull(getLineNumber()), emptyStringIfNull(getFilename()),
+                    emptyStringIfNull(getFilePath()), emptyStringIfNull(getStoryPoints()) };
+        
+    }
+    
+    private String emptyStringIfNull(Object obj) {
+        
+        if (obj == null) {
+            return "";
+        }
+        return obj.toString();
+    }
     
 }
