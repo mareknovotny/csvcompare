@@ -12,18 +12,16 @@ import java.io.Serializable;
  * @author mnovotny
  *
  */
-public class ReportModel implements Serializable
+public class ReportModel
 {
-    private static final long serialVersionUID = -8063940942301635431L;
-
     /* (non-Javadoc)
      * @see java.lang.Object#toString()
      */
     @Override
     public String toString()
     {
-        return "ReportModel [ruleId=" + ruleId + ", problemType=" + problemType + ", application=" + application + ", filename=" + filename
-                    + ", filePath=" + filePath + ", lineNumber=" + lineNumber + ", storyPoints=" + storyPoints + "]";
+        return "ReportModel [ruleId=" + emptyStringIfNull(ruleId) + ", problemType=" + emptyStringIfNull(problemType) + ", application=" + emptyStringIfNull(application) + ", filename=" + emptyStringIfNull(filename)
+                    + ", filePath=" + emptyStringIfNull(filePath) + ", lineNumber=" + emptyStringIfNull(lineNumber) + ", storyPoints=" + emptyStringIfNull(storyPoints) + "]";
     }
 
     private String ruleId;

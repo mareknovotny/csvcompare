@@ -4,9 +4,11 @@ import static org.junit.Assert.*;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.jboss.windup.utils.CsvWindupExportLoader;
 import org.jboss.windup.utils.WindupReportComparison;
 import org.jboss.windup.utils.model.ExportReportModelToCSV;
 import org.jboss.windup.utils.model.ReportModel;
@@ -24,6 +26,25 @@ public class WindupReportComparisonTest
         assertEquals(1, result.size());
         //System.out.println(result);
         //(new ExportReportModelToCSV(result)).export(new File("result.csv"));
+    }
+    
+    @Test
+    public void testLoadAndCompareNewAndOldReports() throws Exception 
+    {
+        CsvWindupExportLoader loader1 = new CsvWindupExportLoader(getClass().getResource("/test1.csv"), ',');
+        CsvWindupExportLoader loader2 = new CsvWindupExportLoader(getClass().getResource("/test2.csv"), ',');
+        
+        List<ReportModel> parsedCSV1 = loader1.parseCSV();
+        assertEquals(4, parsedCSV1.size());
+        assertNotNull("This should not be null!", ((ReportModel) parsedCSV1.get(0)).getApplication());
+        List<ReportModel> parsedCSV2 = loader2.parseCSV();
+        assertEquals(4, parsedCSV2.size());
+        assertNotNull("This should not be null!", ((ReportModel) parsedCSV2.get(0)).getApplication());
+        
+        WindupReportComparison cmp = new WindupReportComparison(parsedCSV1, parsedCSV2);
+        List<ReportModel> result = cmp.compareNewAndOldReports();
+        assertNotNull(result);
+        assertEquals(1, result.size());
     }
     
     /**

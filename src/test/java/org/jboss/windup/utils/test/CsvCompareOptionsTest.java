@@ -8,6 +8,8 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.jboss.windup.utils.CsvCompareOptions;
 import org.junit.Test;
 
@@ -17,7 +19,8 @@ import org.junit.Test;
  */
 public class CsvCompareOptionsTest
 {
-
+    public static final Logger logger = LogManager.getLogger(CsvCompareOptionsTest.class);
+    
     /**
      * Test method for {@link org.jboss.windup.utils.CsvCompareOptions#parse(java.lang.String[])}.
      */
@@ -73,7 +76,7 @@ public class CsvCompareOptionsTest
         try {
             ccOptions.parse(testArgs);
         } catch (Exception pe) {
-            System.out.println(pe.getLocalizedMessage());
+            logger.debug(pe.getLocalizedMessage());
             assertTrue(pe instanceof IllegalArgumentException);
             assertNotNull(ccOptions.getDelimiter());
             assertEquals("Default delimiter should be set correctly", CsvCompareOptions.DEFAULT_CSV_DELIMITER, ccOptions.getDelimiter());

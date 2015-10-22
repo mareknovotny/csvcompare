@@ -3,3 +3,7 @@
 /.settings/
 /.classpath
 /.project
+/dependency-reduced-pom.xml
+/export1.csv
+/export2.csv
+/diff.csv
