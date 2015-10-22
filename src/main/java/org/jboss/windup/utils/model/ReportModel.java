@@ -3,8 +3,6 @@
  */
 package org.jboss.windup.utils.model;
 
-import java.io.Serializable;
-
 /**
  * 
  * Mapping to one line in CSV report

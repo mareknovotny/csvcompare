@@ -17,7 +17,6 @@ import org.jboss.windup.utils.model.ReportModel;
 import com.opencsv.CSVReader;
 import com.opencsv.bean.CsvToBean;
 import com.opencsv.bean.HeaderColumnNameTranslateMappingStrategy;
-import com.opencsv.bean.MappingStrategy;
 
 /**
  * @author mnovotny
