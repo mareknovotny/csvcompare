@@ -33,7 +33,7 @@ public class MainClass
             csvCompareOptions.parse(args);
         }
         catch(Exception exp ) {
-            logger.error("Parsing failed.  Reason: " + exp.getMessage());
+            System.exit(2);
         }
         
         try
