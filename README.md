@@ -15,8 +15,8 @@ Usage help is shown when you run it without arguments:
 
 ```
 usage: csvcompare
- -d,--csv-delimiter <arg>
- -n,--new-file <arg>
- -o,--old-file <arg>
+ -d,--csv-delimiter <delimiter in CSV file>
+ -n,--new-file <URL of CSV file>
+ -o,--old-file <URL of CSV file>
 ```
  
