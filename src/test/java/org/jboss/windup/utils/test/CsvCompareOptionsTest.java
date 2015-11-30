@@ -27,7 +27,7 @@ public class CsvCompareOptionsTest
     @Test
     public void testAllArgsParse()
     {
-        String[] testArgs = new String[] {"-o","file1.txt","-n","file2.txt", "-d",";"};
+        String[] testArgs = new String[] {"-o","file1.txt","-n","file2.txt", "-d",";", "-b"};
         CsvCompareOptions ccOptions = new CsvCompareOptions();
         try
         {
@@ -43,6 +43,7 @@ public class CsvCompareOptionsTest
         assertEquals("Delimiter is not set correctly", ';', ccOptions.getDelimiter());
         assertEquals("new-file is not set correctly", "file2.txt", ccOptions.getNewFile());
         assertEquals("old-file is not set correctly", "file1.txt", ccOptions.getOldFile());
+        assertTrue(ccOptions.isExportedBothDifferences());
         
     }
     

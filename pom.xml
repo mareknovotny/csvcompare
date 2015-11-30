@@ -8,7 +8,7 @@
    </parent>
    <groupId>org.jboss.windup.utils</groupId>
    <artifactId>csvcompare</artifactId>
-   <version>0.0.1-SNAPSHOT</version>
+   <version>0.0.2-SNAPSHOT</version>
    <name>csvcompare</name>
    <description>Compare util for CSV files</description>
    

@@ -27,8 +27,25 @@ public class CsvCompareOptions
     private String oldFile;
     private String newFile;
     private char delimiter = DEFAULT_CSV_DELIMITER;
+    private boolean exportedBothDifferences;
     
     
+    /**
+     * @return the exportedBothDifferences
+     */
+    public boolean isExportedBothDifferences()
+    {
+        return exportedBothDifferences;
+    }
+
+    /**
+     * @param exportedBothDifferences the exportedBothDifferences to set
+     */
+    public void setExportedBothDifferences(boolean exportedBothDifferences)
+    {
+        this.exportedBothDifferences = exportedBothDifferences;
+    }
+
     public void parse (String[] args) throws Exception {
         CommandLineParser parser = new DefaultParser();
         if (args.length <=1){
@@ -61,6 +78,12 @@ public class CsvCompareOptions
             this.setDelimiter(line.getOptionValue('d').charAt(0));
             logger.debug("CSV delimiter is " + getDelimiter());
         } 
+        
+        if (line.hasOption('b')) {
+            this.setExportedBothDifferences(true);
+            logger.debug("Diffed export will have both different lines");
+        } 
+        
         
         //validations
         
@@ -107,6 +130,7 @@ public class CsvCompareOptions
         options.addOption( Option.builder("o").required(true).hasArg(true).argName("URL of CSV file").longOpt("old-file").build());
         options.addOption( Option.builder("n").required(true).hasArg(true).argName("URL of CSV file").longOpt("new-file").build());
         options.addOption( Option.builder("d").hasArg(true).argName("delimiter in CSV file").longOpt("csv-delimiter").build());
+        options.addOption( Option.builder("b").argName("both differences output in CSV file").longOpt("output-both-diff").build());
         
         return options;
     }

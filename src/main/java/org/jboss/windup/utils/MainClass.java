@@ -41,8 +41,14 @@ public class MainClass
             CsvWindupExportLoader loader1 = new CsvWindupExportLoader(new URL(csvCompareOptions.getOldFile()), csvCompareOptions.getDelimiter());
             CsvWindupExportLoader loader2 = new CsvWindupExportLoader(new URL(csvCompareOptions.getNewFile()), csvCompareOptions.getDelimiter());
             WindupReportComparison reportCmp = new WindupReportComparison(loader1.parseCSV(), loader2.parseCSV());
-            List<ReportModel> listDiff = reportCmp.compareNewAndOldReports();
-            if (listDiff.size()> 0) {
+            List<ReportModel> listDiff = null;
+            if ( csvCompareOptions.isExportedBothDifferences() ) {
+                listDiff =reportCmp.compareNewAndOldReportsWithDiffLines();
+            } else {
+                listDiff = reportCmp.compareNewAndOldReports();    
+            }
+            
+            if (listDiff != null && listDiff.size()> 0) {
                 logger.debug(listDiff);
                 (new ExportReportModelToCSV(listDiff)).export(new File("diff.csv"));
                 System.exit(1);

@@ -26,8 +26,22 @@ public class WindupReportComparisonTest
         List<ReportModel> result = cmp.compareNewAndOldReports();
         assertNotNull(result);
         assertEquals(1, result.size());
+        assertEquals(new Integer(0),( (ReportModel) result.get(0)).getStoryPoints());
         //System.out.println(result);
         //(new ExportReportModelToCSV(result)).export(new File("result.csv"));
+    }
+    
+    @Test
+    public void testCompareNewAndOldReportsWithDiffLines() throws Exception 
+    {
+        WindupReportComparison cmp = new WindupReportComparison(createList1(), createList2());
+        List<ReportModel> result = cmp.compareNewAndOldReportsWithDiffLines();
+        assertNotNull(result);
+        assertEquals(2, result.size());
+        assertEquals(new Integer(3),( (ReportModel) result.get(0)).getStoryPoints());
+        assertEquals(new Integer(0),( (ReportModel) result.get(1)).getStoryPoints());
+        //System.out.println(result);
+        (new ExportReportModelToCSV(result)).export(new File("resultDiffedLines.csv"));
     }
     
     @Test
