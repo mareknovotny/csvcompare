@@ -1,12 +1,12 @@
 /**
- * 
+ *
  */
 package org.jboss.windup.utils.model;
 
 /**
- * 
+ *
  * Mapping to one line in CSV report
- * 
+ *
  * @author mnovotny
  *
  */
@@ -23,27 +23,29 @@ public class ReportModel
     }
 
     private String ruleId;
-    
+
     private String problemType;
-    
-    private String Title;
-    
-    private String Description;
-    
+
+    private String title;
+
+    private String description;
+
     private String links;
-    
+
     private String application;
-    
+
     private String filename;
-    
+
     private String filePath;
-    
-    private Integer lineNumber;
-    
+
+    private String lineNumber;
+
+    private Integer storyPoints;
+
+
     public ReportModel() {
-        
     }
-    
+
     public String getRuleId()
     {
         return ruleId;
@@ -66,22 +68,22 @@ public class ReportModel
 
     public String getTitle()
     {
-        return Title;
+        return title;
     }
 
     public void setTitle(String title)
     {
-        Title = title;
+        this.title = title;
     }
 
     public String getDescription()
     {
-        return Description;
+        return description;
     }
 
     public void setDescription(String description)
     {
-        Description = description;
+        this.description = description;
     }
 
     public String getLinks()
@@ -124,12 +126,12 @@ public class ReportModel
         this.filePath = filePath;
     }
 
-    public Integer getLineNumber()
+    public String getLineNumber()
     {
         return lineNumber;
     }
 
-    public void setLineNumber(Integer lineNumber)
+    public void setLineNumber(String lineNumber)
     {
         this.lineNumber = lineNumber;
     }
@@ -143,8 +145,6 @@ public class ReportModel
     {
         this.storyPoints = storyPoints;
     }
-
-    private Integer storyPoints;
 
     /* (non-Javadoc)
      * @see java.lang.Object#hashCode()
@@ -210,15 +210,15 @@ public class ReportModel
         return new String[] { emptyStringIfNull(getRuleId()) , emptyStringIfNull(getProblemType()),
                     emptyStringIfNull(getLineNumber()), emptyStringIfNull(getFilename()),
                     emptyStringIfNull(getFilePath()), emptyStringIfNull(getStoryPoints()) };
-        
+
     }
-    
+
     private String emptyStringIfNull(Object obj) {
-        
+
         if (obj == null) {
             return "";
         }
         return obj.toString();
     }
-    
+
 }
