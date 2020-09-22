@@ -1,5 +1,7 @@
 # CSV file comparator tool
 
+![Java CI with Maven](https://github.com/mareknovotny/csvcompare/workflows/Java%20CI%20with%20Maven/badge.svg)
+
 Basic tool to compare two CSV files from [Windup](http://github.com/windup/windup) CSV export and outputs as CSV file with different lines from second file.
 
 There is `compare.sh` script to launch the tool
