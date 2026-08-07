@@ -27,7 +27,7 @@ public class CsvWindupExportLoader
     public static final Logger logger = LogManager.getLogger(CsvWindupExportLoader.class);
 
     private static final String[] CSV_COLUMNS = {"Rule Id","Problem type","Title","Description","Links","Application","File Name","File Path","Line","Story points"};
-    private static final String[] REPORTMODEL_FIELDS = {"ruleId","problemType","title","description","links","application","fileName","filePath","lineNumber","storyPoints"};
+    private static final String[] REPORTMODEL_FIELDS = {"ruleId","problemType","title","description","links","application","filename","filePath","lineNumber","storyPoints"};
 
     // init mapping for CSV column to ReportModel bean
     private static Map<String,String> mapping = new HashMap<String,String>();
