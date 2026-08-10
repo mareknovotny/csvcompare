@@ -48,13 +48,16 @@ public class CsvCompareOptions
 
     public void parse (String[] args) throws Exception {
         CommandLineParser parser = new DefaultParser();
-        if (args.length <=1){
-            logger.error("Missing required arguments old-file and new-file");
-            printUsage(args);
-            throw new IllegalArgumentException("Missing required arguments");
-        }
-            
+
         CommandLine line = parser.parse( getCMdOptions(), args );
+
+        // ensure both required options are present (provide a clearer message if missing)
+        if (!line.hasOption("o") || !line.hasOption("n")) {
+            logger.error("Both --old-file (-o) and --new-file (-n) are required");
+            printUsage(args);
+            throw new IllegalArgumentException("Missing required options: --old-file and --new-file");
+        }
+        
         if ( line.hasOption('o')) {
             String oldFileOptionValue = line.getOptionValue("o");
             if (validateExistingFile(oldFileOptionValue)) {
