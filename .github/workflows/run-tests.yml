@@ -6,8 +6,14 @@ name: Java CI with Maven
 on:
   push:
     branches: [ master ] 
+    paths:
+      - 'src/**'  # Any file or subfolder inside the src directory
+      - '*'       # Any file located directly in the root directory
   pull_request:
-      types: [opened, synchronize, reopened, ready_for_review, labeled]
+    types: [opened, synchronize, reopened, ready_for_review, labeled]
+    paths:
+      - 'src/**'  # Any file or subfolder inside the src directory
+      - '*'       # Any file located directly in the root directory
 
 jobs:
   build:
