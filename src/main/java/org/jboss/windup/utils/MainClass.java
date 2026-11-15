@@ -38,8 +38,8 @@ public class MainClass
         
         try
         {
-            CsvWindupExportLoader loader1 = new CsvWindupExportLoader(new URL(csvCompareOptions.getOldFile()), csvCompareOptions.getDelimiter());
-            CsvWindupExportLoader loader2 = new CsvWindupExportLoader(new URL(csvCompareOptions.getNewFile()), csvCompareOptions.getDelimiter());
+            CsvWindupExportLoader loader1 = new CsvWindupExportLoader(new File(csvCompareOptions.getOldFile()).toURI().toURL(), csvCompareOptions.getDelimiter());
+            CsvWindupExportLoader loader2 = new CsvWindupExportLoader(new File(csvCompareOptions.getNewFile()).toURI().toURL(), csvCompareOptions.getDelimiter());
             WindupReportComparison reportCmp = new WindupReportComparison(loader1.parseCSV(), loader2.parseCSV());
             List<ReportModel> listDiff = null;
             if ( csvCompareOptions.isExportedBothDifferences() ) {
